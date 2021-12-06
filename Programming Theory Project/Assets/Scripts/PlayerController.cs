@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 
     private float movementSpeed = 1000;
-    public float jumpForce = 2000;
+    public float jumpForce = 4000;
     public float timeBeforeNextJump = 1.60f;
     Animator anim;
     Rigidbody rb;
@@ -80,7 +80,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl)) {
             cat.LaunchProjectile();
         }
-
+        if (transform.position.x > 500 || transform.position.x < 0 || transform.position.z > 500 || transform.position.z < 0) {
+            transform.position = new Vector3(250, 10, 250);
+            rb.velocity = Vector3.zero;
+        }
     }
 
     private void OnCollisionStay (Collision collision)
