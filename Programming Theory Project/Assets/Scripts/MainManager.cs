@@ -12,10 +12,12 @@ public class MainManager : MonoBehaviour
     private GameObject player;
     public int hp = 100;
     public Text hpText;
+    public Text nicknameText;
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
+        nicknameText.text = MenuHandler.nickname;
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         currentAnimal = animals[0];
