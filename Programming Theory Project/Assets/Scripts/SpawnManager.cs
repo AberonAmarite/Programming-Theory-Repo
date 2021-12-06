@@ -27,10 +27,10 @@ public class SpawnManager : MonoBehaviour
     float GetCoordinate(float coord) {
         if (Random.Range(0, 2) == 0)
         {
-            return Random.Range(coord - 30, coord - 5);
+            return Random.Range(coord - 60, coord - 15);
         }
         else {
-            return Random.Range(coord + 30, coord + 5);
+            return Random.Range(coord + 60, coord + 15);
         }
     }
     void SpawnEnemy() { 

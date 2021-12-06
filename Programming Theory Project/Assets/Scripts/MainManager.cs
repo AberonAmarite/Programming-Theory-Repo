@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
@@ -9,9 +10,12 @@ public class MainManager : MonoBehaviour
     public GameObject[] animals;
     private PlayerController playerController;
     private GameObject player;
+    public int hp = 100;
+    public Text hpText;
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         currentAnimal = animals[0];
@@ -35,6 +39,11 @@ public class MainManager : MonoBehaviour
             }
         }
 
+    }
+
+    public void DisplayDamage() {
+        hp --;
+        hpText.text = "HP: " + hp;
     }
 
 

@@ -65,16 +65,17 @@ public class PlayerController : MonoBehaviour
                 rb.AddRelativeForce(0, movementSpeed / 2, movementSpeed);
                 anim.SetTrigger("jump");
                 rb.freezeRotation = true;
-             
+                LimitVelocity3D();
+
             }
             else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             {
                 inAir = true;
                 rb.freezeRotation = false;
-                rb.AddRelativeForce(0, movementSpeed / 2, -movementSpeed);
+                rb.AddRelativeForce(0, movementSpeed / 2, -movementSpeed );
                 anim.SetTrigger("jump");
                 rb.freezeRotation = true;
-              
+                LimitVelocity3D();
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftControl)) {
@@ -84,11 +85,43 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(250, 10, 250);
             rb.velocity = Vector3.zero;
         }
+       
+    }
+ 
+    void LimitVelocity3D() {
+        if (rb.velocity.x > 5)
+        {
+            rb.velocity = new Vector3(5, rb.velocity.y, rb.velocity.z);
+        }
+        else if (rb.velocity.x < -5)
+        {
+            rb.velocity = new Vector3(-5, rb.velocity.y, rb.velocity.z);
+        }
+        if (rb.velocity.y > 5)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 5, rb.velocity.z);
+        }
+        else if (rb.velocity.y < -5) {
+            rb.velocity = new Vector3(rb.velocity.x, -5, rb.velocity.z);
+        }
+        if (rb.velocity.z > 5)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 5);
+        }
+        else if (rb.velocity.z < -5)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -5);
+        }
     }
 
     private void OnCollisionStay (Collision collision)
     {
-        inAir = false;
+        if(collision.gameObject.name == "Terrain") inAir = false;
+        if (collision.gameObject.CompareTag("Enemy") ){
+            Vector3 lookDirection = (transform.position - collision.transform.position).normalized;
+            rb.AddForce(4000 * (new Vector3(lookDirection.x, 0.005f, lookDirection.z)));
+            MainManager.Instance.DisplayDamage();
+        }
     }
-
+    
 }
