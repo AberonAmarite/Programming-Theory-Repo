@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     Vector3 playerPos;
     Animator anim;
     public float hp = 500;
+    public bool canStrike = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +24,17 @@ public class Enemy : MonoBehaviour
     {
         playerPos = player.transform.position;
         transform.LookAt(playerPos);
-        rb.AddForce(2000*(playerPos - transform.position).normalized);
+        rb.AddForce(3500*(playerPos - transform.position).normalized);
         if(hp < 0) Destroy(gameObject);
     }
-  
+    private void OnCollisionEnter(Collision collision)
+    {
+        rb.AddForce(Vector3.up*3000);
+    }
+
+    public IEnumerator DelayStrike()
+    {
+        yield return new WaitForSeconds(2);
+        canStrike = true;
+    }
 }

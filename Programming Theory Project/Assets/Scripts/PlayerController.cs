@@ -120,7 +120,8 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy") ){
             Vector3 lookDirection = (transform.position - collision.transform.position).normalized;
             rb.AddForce(4000 * (new Vector3(lookDirection.x, 0.005f, lookDirection.z)));
-            MainManager.Instance.DisplayDamage();
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            if(enemy) MainManager.Instance.DisplayDamage(enemy);
         }
     }
     

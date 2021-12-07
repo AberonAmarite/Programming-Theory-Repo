@@ -423,7 +423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c99ccfc9ab2e8ab45bc8b72118397a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputField: {fileID: 0}
+  inputField: {fileID: 1269853272}
+  isFirstScene: 0
 --- !u!1 &613400396
 GameObject:
   m_ObjectHideFlags: 0
