@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class Chicken : Animal
 {
-    // Start is called before the first frame update
- 
+    public override void LaunchProjectile()
+    {
+        if (isActiveAndEnabled)
+        {
+            GameObject proj = Instantiate(projectile);
+            proj.transform.position = transform.position + new Vector3(0, 6, 0);
+            proj.GetComponent<Rigidbody>().AddForce(transform.forward * 2000);
+            proj.GetComponent<Rigidbody>().AddTorque(transform.forward * 300);
+        }
+
+    }
+
 }
